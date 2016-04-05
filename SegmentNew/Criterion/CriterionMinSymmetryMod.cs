@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Model;
-using SegmentNew.Threshold;
+using SegmentNew2.Model;
+using SegmentNew2.Threshold;
 using System.Collections.Generic;
 
-namespace SegmentNew.Criterion
+namespace SegmentNew2.Criterion
 {
     class CriterionMinSymmetryMod : ACriterion
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Model;
+using SegmentNew2.Model;
 
-namespace SegmentNew.Threshold
+namespace SegmentNew2.Threshold
 {
     abstract class AThreshold
     {

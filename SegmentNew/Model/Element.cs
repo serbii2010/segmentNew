@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SegmentNew.Model
+namespace SegmentNew2.Model
 {
     class Element
     {

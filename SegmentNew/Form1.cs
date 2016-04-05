@@ -9,12 +9,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SegmentNew.Criterion;
-using SegmentNew.Factories;
-using SegmentNew.Model;
-using SegmentNew.Threshold;
+using SegmentNew2.Criterion;
+using SegmentNew2.Factories;
+using SegmentNew2.Model;
+using SegmentNew2.Threshold;
 
-namespace SegmentNew
+namespace SegmentNew2
 {
     public partial class Form1 : Form
     {

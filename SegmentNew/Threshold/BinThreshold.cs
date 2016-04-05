@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Criterion;
-using SegmentNew.Threshold;
+using SegmentNew2.Criterion;
+using SegmentNew2.Threshold;
 
-namespace SegmentNew.Model
+namespace SegmentNew2.Model
 {
     class BinThreshold : AThreshold
     {

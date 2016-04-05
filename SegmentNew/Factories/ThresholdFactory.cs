@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Model;
-using SegmentNew.Threshold;
+using SegmentNew2.Model;
+using SegmentNew2.Threshold;
 
-namespace SegmentNew.Factories
+namespace SegmentNew2.Factories
 {
     class ThresholdFactory
     {

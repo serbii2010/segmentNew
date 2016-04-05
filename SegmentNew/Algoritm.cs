@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Model;
-using SegmentNew.Criterion;
-using SegmentNew.Threshold;
+using SegmentNew2.Model;
+using SegmentNew2.Criterion;
+using SegmentNew2.Threshold;
 using System.Windows.Forms;
 
-namespace SegmentNew
+namespace SegmentNew2
 {
     class Algoritm
     {

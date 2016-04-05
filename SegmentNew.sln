@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegmentNew", "SegmentNew\SegmentNew.csproj", "{24C194A2-E924-42B2-A4B1-CC62358F00CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegmentNew2", "SegmentNew\SegmentNew2.csproj", "{24C194A2-E924-42B2-A4B1-CC62358F00CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

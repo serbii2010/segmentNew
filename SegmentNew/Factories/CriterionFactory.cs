@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SegmentNew.Criterion;
-using SegmentNew.Model;
+using SegmentNew2.Criterion;
+using SegmentNew2.Model;
 
-namespace SegmentNew.Factories
+namespace SegmentNew2.Factories
 {
     class CriterionFactory
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using SegmentNew.Model;
-using SegmentNew.Threshold;
+using SegmentNew2.Model;
+using SegmentNew2.Threshold;
 
-namespace SegmentNew.Criterion
+namespace SegmentNew2.Criterion
 {
     abstract class ACriterion
     {

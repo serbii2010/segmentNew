@@ -1,4 +1,4 @@
-﻿namespace SegmentNew
+﻿namespace SegmentNew2
 {
     /// <summary>
     /// Link of intervals.
