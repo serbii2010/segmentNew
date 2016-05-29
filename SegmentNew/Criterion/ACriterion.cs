@@ -8,8 +8,8 @@ namespace SegmentNew2.Criterion
     {
         public const int CRITERION_ORLOV = 0;
 
-        public const int CRITERION_MIN_SYMMETRY = 2;
-        public const int CRITERION_MIN_SYMMETRY_MOD = 4;
+        public const int CRITERION_MIN_SYMMETRY = 1;
+        public const int CRITERION_MIN_SYMMETRY_MOD = 2;
         public const int CRITERION_MIN_SYMMETRY_NEW = 3;
 
         public AThreshold threshold;

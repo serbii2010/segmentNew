@@ -40,7 +40,7 @@ namespace SegmentNew2
                 Segmentate();
                 
             }
-			threshold.bestP = threshold.currentValue;
+			threshold.bestP = criterion.bestP;
             
         }
 
@@ -51,23 +51,27 @@ namespace SegmentNew2
                 int j = 0;
                 while (j+i <= chain.Count)
                 {
-					double freqPract = (1 - k) * (chain.frequncyPractic (j, i));
-					double intervalPract = (k * chain.intervalPractic(j, i, Link.End));
+					double freqPract = (1 - k) * chain.frequncyPractic (j, i);
+					double intervalPract = ( chain.intervalPractic(j, i, Link.End));
 					double freqCalc = (1 - k) * chain.frequncyCalculate (j, i);
-					double intervalCalc = k * chain.intervalCalculate (j, i, Link.End);
-					//double pract = ((1 - k)*(chain.frequncyPractic(j, i)));
-					//double calc = ((1 - k) * chain.frequncyCalculate(j, i));
-
-					double pract = freqPract;
-					double calc = freqCalc;
-                    
-					//double pract = ((1 - k)* freqPract) + (k * intervalPract);
-					//double calc = ((1 - k) * freqCalc) + (k * intervalCalc);
+					double intervalCalc =  chain.intervalCalculate (j, i, Link.End);
 
 
-                    //if (intervalCalc != 0.0 || intervalPract != 0.0) {
-                    //    MessageBox.Show ("123");
-                    //}
+                    //double pract = freqPract;
+                    //double calc = freqCalc;
+
+
+                    double pract = freqPract + k * intervalPract;
+                    double calc = freqCalc + k * intervalCalc;
+
+
+
+
+                    if (intervalCalc *k != 0)
+                    {
+                        j++;
+                        continue;
+                    }
 
 					double std = Math.Abs(pract - calc) / Math.Sqrt(calc);
 
@@ -94,7 +98,7 @@ namespace SegmentNew2
         /**
          * сегментация для заданного порогового значения
          */
-        public void SegmentateOfP(double bestP)
+        public void SegmentateOfP()
         {
             this.chain = originalChain.Clone();
             for (int i = window; i >= 2; i--)
@@ -110,7 +114,7 @@ namespace SegmentNew2
 
                     double std = Math.Abs(pract - calc) / Math.Sqrt(calc);
 
-                    if (std > bestP)
+                    if (std > threshold.bestP)
                     {
                         chain.cutDown(j, i);
                     }

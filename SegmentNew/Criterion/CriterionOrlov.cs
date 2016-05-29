@@ -56,6 +56,10 @@ namespace SegmentNew2.Criterion
                 
                 return true;
             }
+            if (this.threshold.id == AThreshold.THRESHOLD_LINEAR && this.threshold.currentValue > threshold.rightBound)
+            {
+                return false;
+            }
             return (this.threshold.Distance > this.threshold.precision)
                    && (Math.Abs(Distortion(chain)) > epsilon);
         }

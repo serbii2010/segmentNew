@@ -8,10 +8,14 @@ using SegmentNew2.Threshold;
 
 namespace SegmentNew2.Criterion
 {
+    /**
+     * а этот метод основан на глубине, (глубина однородной цепи + разнородной) / кол-во слов в словаре // почему то
+     */
+
     class CriterionMinSymmetryNew : ACriterion
     {
         public double oldSymmmetry;
-        public double minSymmetry = double.MaxValue;
+        public double minSymmetry = double.MinValue;
 
         public CriterionMinSymmetryNew(AThreshold threshold, Chain chain, double epsilon) : base(threshold, chain, epsilon)
         {
@@ -21,10 +25,15 @@ namespace SegmentNew2.Criterion
         {
             double sym = getSymmetry(chain);
             oldSymmmetry = minSymmetry;
-            if (this.minSymmetry >= sym)
+            if (this.minSymmetry <= sym) // ищем максимум
             {
                 this.minSymmetry = sym;
+                bestP = threshold.currentValue;
                 return true;
+            }
+            if (this.threshold.id == AThreshold.THRESHOLD_LINEAR && this.threshold.currentValue > threshold.rightBound)
+            {
+                return false;
             }
             return true;
         }
@@ -56,7 +65,7 @@ namespace SegmentNew2.Criterion
                 }
             }
 
-            double res = (q1 + q2)/chain.getDictionaryCount();
+            double res = (q1 + q2) / chain.getCount();
             return res;
         }
 

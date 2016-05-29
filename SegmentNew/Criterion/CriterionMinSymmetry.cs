@@ -8,6 +8,16 @@ using SegmentNew2.Threshold;
 
 namespace SegmentNew2.Criterion
 {
+    /**
+     * метод делает расчет основываясь только на частотах слов
+     * 
+     * перемножаются количества всех одинаковых слов на количество классов по n слов
+     * 
+     * факториал общего количества слов делится на произведение факториалов колиства одинаковых слов
+     * и все это умножается на частное факториала общего количества слов в словаре и факториал количества классов по n слов
+     * 
+     * так как число большое все в логарифмическом масштабе
+     */
     class CriterionMinSymmetry : ACriterion
     {
         public double oldSymmmetry;
@@ -17,15 +27,15 @@ namespace SegmentNew2.Criterion
         public CriterionMinSymmetry(AThreshold threshold, Chain chain, double epsilon) : base(threshold, chain, epsilon)
         {
         }
-
+        //todo найти критерий остановки при бинарном поиске либо сделать новый бинарный поиск
         public override bool state(Chain chain)
         {
             double sym = getSymmetry(chain);
             oldSymmmetry = minSymmetry;
-            if (this.minSymmetry >= sym)
+            if (this.minSymmetry >= sym) // ищем минимум
             {
                 this.minSymmetry = sym;
-                threshold.bestP = threshold.currentValue;
+                bestP = threshold.currentValue;
             }
             if (threshold.id == AThreshold.THRESHOLD_LINEAR)
             {

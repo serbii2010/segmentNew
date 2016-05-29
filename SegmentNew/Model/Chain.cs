@@ -48,7 +48,7 @@ namespace SegmentNew2.Model
             int index = 0;
             if (block == null)
             {
-                return null;
+                return new List<int>();
             }
             while (this.Count >= block.Count + index)
             {
@@ -59,6 +59,10 @@ namespace SegmentNew2.Model
                     index += block.Count-1;
                 }
                 index++;
+            }
+            if (res.Count == 0)
+            {
+                this.findAll(block);
             }
             return res;
         }
@@ -101,24 +105,33 @@ namespace SegmentNew2.Model
                 return 0;
             }
             List<int> positions = this.findAll(block);
+            if (positions.Count == 0)
+            {
+                return 0;
+            }
             if (positions.Count > 1)
             {
                 int pred = positions[0];
                 for (int i = 1; i < positions.Count; i++)
                 {
                     int current = positions[i];
-                    interval *= current - pred - block.Count + 1;
+                    interval += Math.Log(current - pred - block.Count + 1, 2);
                     pred = current;
                 }
             }
-            int begin = positions[0] + 1;
-            int end = getCount() - positions[positions.Count - 1] - (block.Count - 1);
+            //todo сделать что то если слова не найдены
+            double begin = Math.Log(positions[0] + 1, 2);
+            var count = getCount();
+            double end = Math.Log(getCount() - positions[positions.Count - 1] - (block.Count - 1) + 1, 2);
+            if (end * 0 != 0) {
+                var a = 1;
+            }
             switch (link)
             {
                 case Link.Start:
-				return 1.0 / Math.Pow(interval * begin, 1.0 / (double)positions.Count());
+				return 1.0 / Math.Pow(interval + begin, 1.0 / (double)positions.Count());
                 case Link.End:
-				return 1.0 / Math.Pow(interval * end, 1.0 / (double)positions.Count());
+				return 1.0 / Math.Pow(interval + end, 1.0 / (double)positions.Count());
                 case Link.Both:
                     return 0;
                 default:
@@ -131,19 +144,29 @@ namespace SegmentNew2.Model
             double calc;
             if (length > 2)
             {
-                calc = (intervalPractic(start, length - 1, link) * intervalPractic(start + 1, length - 1, link)) /
-                         intervalPractic(start + 1, length - 2, link);
+                var intPractbegin = intervalPractic(start, length - 1, link);
+                var intPraciEnd = intervalPractic(start + 1, length - 1, link);
+                var intProctBeginEnd = intervalPractic(start + 1, length - 2, link);
+                calc = (intPractbegin + intPraciEnd) - intProctBeginEnd;
+                if (calc * 0 != 0)
+                {
+                    intPraciEnd = intervalPractic(start + 1, length - 1, link);
+                    intProctBeginEnd = intervalPractic(start + 1, length - 2, link);
+                    return 1;
+
+                }
             }
             else
             {
                 calc = intervalPractic(start, 1, link) * intervalPractic(start + 1, 1, link);
             }
 
-			if(calc == 0){
-				return 0.0;
-			}
+            //if(calc == 0){
+            //    return 1;
+            //}
+            
 			if(calc.GetType() != typeof(double)){
-				return 0.0;
+				return 1;
 			}
             return calc;
         }
@@ -201,7 +224,15 @@ namespace SegmentNew2.Model
             string res = "";
             foreach (var el in this)
             {
-                res += el.element + "|";
+                if (el.element == "\n")
+                {
+                    res += "\r" + el.element + "|";
+                }
+                else
+                {
+                    res += el.element + "|";
+                }
+                
             }
 
             return res;
@@ -228,7 +259,7 @@ namespace SegmentNew2.Model
             {
                 if (el.element == "\n")
                 {
-                    count--;
+                    //count--;
                 }
             }
 
@@ -248,6 +279,17 @@ namespace SegmentNew2.Model
             }
 
             return count;
+        }
+
+        public string getDictionaryToString()
+        {
+            this.recalculate();
+            string result = "";
+            foreach (var i in dictionary)
+            {
+                result += i.Key + " ";
+            }
+            return result;
         }
     }
 }

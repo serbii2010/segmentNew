@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace SegmentNew2.Criterion
 {
+    /**
+     * отличия данного метода описаны в коде
+     */
     class CriterionMinSymmetryMod : ACriterion
     {
         public double oldSymmmetry;
@@ -23,10 +26,10 @@ namespace SegmentNew2.Criterion
         {
             double sym = getSymmetry(chain);
             oldSymmmetry = minSymmetry;
-            if (this.minSymmetry <= sym)
+            if (this.minSymmetry <= sym) // ищем максимум а не минимум
             {
                 this.minSymmetry = sym;
-                threshold.bestP = threshold.currentValue;
+                bestP = threshold.currentValue;
             }
             if (threshold.id == AThreshold.THRESHOLD_LINEAR)
             {
@@ -50,7 +53,7 @@ namespace SegmentNew2.Criterion
             {
                 if (!listClass.Contains(el.Value))
                 {
-                    listClass.Add(el.Value);
+                    listClass.Add(el.Value); // собираем в список список всех классов которые есть в словаре
                 }
                 q1 += factorialLog(el.Value);
             }
@@ -59,7 +62,7 @@ namespace SegmentNew2.Criterion
                 int m = 0;
                 foreach (var el in chain.dictionary)
                 {
-                    if (el.Value <= i)
+                    if (el.Value <= i) // тут отличие от основного метода, берутся не только такие же классы но и все классы ниже текущего
                     {
                         m++;
                     }

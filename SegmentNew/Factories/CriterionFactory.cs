@@ -16,9 +16,10 @@ namespace SegmentNew2.Factories
             {
                 case 0: return new CriterionOrlov(input.threshold, input.chain, epsilon);
 
-                case 2: return new CriterionMinSymmetry(input.threshold, input.chain, epsilon); 
+                case 1: return new CriterionMinSymmetry(input.threshold, input.chain, epsilon);
+                case 2: return new CriterionMinSymmetryMod(input.threshold, input.chain, epsilon);
                 case 3: return new CriterionMinSymmetryNew(input.threshold, input.chain, epsilon); 
-                case 4: return new CriterionMinSymmetryMod(input.threshold, input.chain, epsilon); 
+                 
                 default: return new CriterionOrlov(input.threshold, input.chain, epsilon);
             }
         }

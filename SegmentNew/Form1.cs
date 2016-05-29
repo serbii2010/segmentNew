@@ -21,11 +21,28 @@ namespace SegmentNew2
         public Form1()
         {
             InitializeComponent();
-            
-            runAlgoritm();
+
+            comboCriterion.SelectedIndex = 0;
+            comboThreshold.SelectedIndex = 1;
+            //runAlgoritm();
         }
 
-        public void runAlgoritm()
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var alg = runAlgoritm();
+
+            alg.SegmentateOfP();
+
+            string text = alg.chain.ToString();
+
+            var dict = alg.chain.getDictionaryToString();
+
+            textBox1.Text = dict + "\r\n\r\n" + text;
+        }
+
+        private Algoritm runAlgoritm()
         {
             string nameFile;
             //string text = "";
@@ -35,9 +52,14 @@ namespace SegmentNew2
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 nameFile = fileDialog.FileName;
-                text = File.ReadAllText(nameFile).ToLower();
-                //string pattern = "[-.?!)(,:" + Regex.Escape("[") + "]";
-                //var newText = Regex.Replace(text, "[-.?!)(,:\\[\\]\"«»\r]", "");
+                text = File.ReadAllText(nameFile);
+                //text = File.ReadAllText("C:\\Users\\александр\\Documents\\Visual Studio 2012\\Projects\\SegmentNew\\blake.txt").ToLower();
+                string pattern = "[-.?!)(,:" + Regex.Escape("[") + "]";
+                text = Regex.Replace(text, "[-.?!)(,:;\\[\\]\"«»\r]", "");
+                text = text.ToLower();
+
+                text = text.Replace(" ", "");
+                text = text.Replace("\n\n", "\n");
             }
 
             //System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch(); // создаем объект 
@@ -45,20 +67,23 @@ namespace SegmentNew2
 
             Input input = new Input();
             input.chain = new Chain(text);
-            input.window = 5;
+            input.window = 10;
             input.k = 0;
 
-			//input.threshold = ThresholdFactory.getThreshold(AThreshold.THRESHOLD_LINEAR, 0.19819000000005743, 0.5);
-			input.threshold = ThresholdFactory.getThreshold(AThreshold.THRESHOLD_BIN, 0, 0.5);
 
-		
+            //input.threshold = ThresholdFactory.getThreshold(AThreshold.THRESHOLD_LINEAR, 0.19819000000005743, 0.5);
+            input.threshold = ThresholdFactory.getThreshold(comboThreshold.SelectedIndex, 0, 0.6);
+
+
             Algoritm algoritm = new Algoritm(input);
 
-			var criterion = CriterionFactory.GetCriterion(ACriterion.CRITERION_ORLOV, input, 1);
+            var criterion = CriterionFactory.GetCriterion(comboCriterion.SelectedIndex, input, 1);
 
             algoritm.run(criterion);
 
-            algoritm.SegmentateOfP(algoritm.threshold.bestP);
+            //algoritm.SegmentateOfP();
+
+            return algoritm;
 
             string result = algoritm.chain.ToString();
 
@@ -66,10 +91,7 @@ namespace SegmentNew2
             //label1.Text = swatch.ElapsedMilliseconds.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            runAlgoritm();
-        }
+        
 
     }
 
